@@ -1,10 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export default function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const location = useLocation();
+
+  console.log('location', location);
 
   async function handleSignInSubmit(e) {
     e.preventDefault();
