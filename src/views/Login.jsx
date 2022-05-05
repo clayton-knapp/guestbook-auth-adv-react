@@ -51,7 +51,7 @@ export default function Login() {
           aria-label="Sign In"
         >Sign-In</button>
         <button
-          areia-label="Sign Up"
+          aria-label="Sign Up"
           onClick={handleSignUpClick}
         >Sign-Up</button>
       </form>
