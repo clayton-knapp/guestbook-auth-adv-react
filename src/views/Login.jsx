@@ -1,20 +1,27 @@
 import React from 'react';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useUser } from '../context/UserContext';
 
 export default function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const location = useLocation();
+  const context = useUser();
 
   console.log('location', location);
 
   async function handleSignInSubmit(e) {
-    e.preventDefault();
-    console.log('email', email);
-    // const user = await signInUser(email, password);
-    // setUser(user);
+    try {
+      e.preventDefault();
+      context.login(email, password);
+      // setUser(user);
+    } catch (error) {
+      setError(error.message);
+    }
+
   }
 
   async function handleSignUpClick() {
@@ -59,6 +66,8 @@ export default function Login() {
           onClick={handleSignUpClick}
         >Sign-Up</button>
       </form>
+      {/* if login error display here */}
+      <p>{error}</p>
     </div>
   )
 };
