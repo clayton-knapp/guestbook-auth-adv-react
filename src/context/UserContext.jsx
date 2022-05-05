@@ -4,7 +4,6 @@ const UserContext = createContext();
 
 // create a UserProvider component to provide components with state
 
-
 export default function UserProvider({ children }) {
   const [user, setUser] = useState({ email: null });
 
