@@ -19,13 +19,13 @@ export default function EntryList() {
     getAndSetEntries();
   }, []);
 
-  
+  console.log('entries', entries);
 
   async function handleSubmitEntry(e) {
     e.preventDefault();
 
     console.log('stuff', id, userEntry)
-    await createEntry({ id, userEntry });
+    await createEntry({ userId: id, content: userEntry });
 
 
   }
@@ -65,16 +65,15 @@ export default function EntryList() {
       {isLoading
         ? <p>Loading entries...</p>
         : (
-          entries.map((entry) => {
-            <p
-              key={entry.id}
-            >{entry.content}</p>
-          })
+          <ul>
+            {entries.map((entry) => 
+              <p key={entry.id}>
+                {entry.content}
+              </p>
+            )}
+          </ul>
         )
       }
-
-
-
     </div>
   )
 };
