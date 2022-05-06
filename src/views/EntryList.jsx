@@ -41,18 +41,9 @@ export default function EntryList() {
     refreshEntries();
   }
 
-  // async function handleLogout() {
-  //   await context.logout();
-  // }
-
-
   return (
     <div>
       <h2>Create an Entry</h2>
-      {/* <button
-        onClick={handleLogout}
-      >Log Out</button> */}
-
       <form action=""
         onSubmit={handleSubmitEntry}
       >
