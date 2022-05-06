@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 
 export default function Login() {
@@ -10,15 +10,27 @@ export default function Login() {
   const [error, setError] = useState('');
   const location = useLocation();
   const context = useUser();
+  const history = useHistory();
 
-  console.log('location', location);
+  // console.log('location', location);
 
   async function handleSignInSubmit(e) {
     try {
       e.preventDefault();
+      // login function from context
       context.login(email, password);
-      // setUser(user);
+
+      // check to see if we have from url in location object
+      const url = location.state.from
+        ? location.state.from.pathname
+        : '/';
+      
+      // redirect to url
+      history.replace(url);
+      
+      // console.log('context from handleSubmit in Login', context);
     } catch (error) {
+      // catches the error thrown on line 20 of UserContext
       setError(error.message);
     }
 
