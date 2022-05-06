@@ -21,12 +21,12 @@ export default function Login() {
       await context.login(email, password);
 
       // check to see if we have from url in location object
-      // const url = location.state.from
-      //   ? location.state.from.pathname
-      //   : '/';
+      const url = location.state.from
+        ? location.state.from.pathname
+        : '/';
       
       // redirect to url
-      history.replace('/');
+      history.replace(url);
       
       // console.log('context from handleSubmit in Login', context);
     } catch (error) {
@@ -43,12 +43,12 @@ export default function Login() {
       await context.signUp(email, password);
 
       // check to see if we have from url in location object
-      // const url = location.state.from
-      //   ? location.state.from.pathname
-      //   : '/';
+      const url = location.state.from
+        ? location.state.from.pathname
+        : '/';
       
       // redirect to url
-      history.replace('/');
+      history.replace(url);
       
       // console.log('context from handleSubmit in Login', context);
     } catch (error) {
