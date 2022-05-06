@@ -15,6 +15,8 @@ export default function UserProvider({ children }) {
     // use supabase signInUser
     const authenticatedUser = await signInUser({ email, password });
 
+    console.log('authenticatedUser', authenticatedUser);
+
     // first hardcode user
     if (authenticatedUser) {
       // set the user in context and should redirect to page they were trying to go to
