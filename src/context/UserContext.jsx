@@ -19,7 +19,7 @@ export default function UserProvider({ children }) {
     // first hardcode user
     if (authenticatedUser) {
       // set the user in context and should redirect to page they were trying to go to
-      setUser({ email: 'bob@bob.com' });
+      setUser(authenticatedUser);
     }
     // else {
     //   //set an error message of Invalid credentials
