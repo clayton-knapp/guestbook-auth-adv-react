@@ -41,17 +41,17 @@ export default function EntryList() {
     refreshEntries();
   }
 
-  async function handleLogout() {
-    await context.logout();
-  }
+  // async function handleLogout() {
+  //   await context.logout();
+  // }
 
 
   return (
     <div>
-      <h2>Entries</h2>
-      <button
+      <h2>Create an Entry</h2>
+      {/* <button
         onClick={handleLogout}
-      >Log Out</button>
+      >Log Out</button> */}
 
       <form action=""
         onSubmit={handleSubmitEntry}
@@ -66,6 +66,7 @@ export default function EntryList() {
           placeholder='Enter text here'
           onChange={(e) => setUserEntry(e.target.value)}
         ></textarea>
+        <br></br>
         <button
           type="submit"
           aria-label='Submit Entry'
@@ -75,14 +76,17 @@ export default function EntryList() {
       {isLoading
         ? <p>Loading entries...</p>
         : (
-          <ul>
-            {entries.map((entry) => 
-              <div key={entry.id}>
-                <h3>{email} at {new Date(entry.created_at).toLocaleString()}</h3>
-                <p>{entry.content}</p>
-              </div>
-            )}
-          </ul>
+          <>
+            <h2>Entries</h2>
+            <ul>
+              {entries.map((entry) => 
+                <div key={entry.id}>
+                  <h3>{email} at {new Date(entry.created_at).toLocaleString()}</h3>
+                  <p>{entry.content}</p>
+                </div>
+              )}
+            </ul>
+          </>
         )
       }
     </div>
