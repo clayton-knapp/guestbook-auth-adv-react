@@ -18,7 +18,7 @@ export default function Login() {
     try {
       e.preventDefault();
       // login function from context
-      context.login(email, password);
+      await context.login(email, password);
 
       // check to see if we have from url in location object
       const url = location.state.from
