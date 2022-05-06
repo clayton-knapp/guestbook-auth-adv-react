@@ -14,19 +14,19 @@ export default function Login() {
 
   // console.log('location', location);
 
-  async function handleSignInSubmit(e) {
+  async function handleSignInClick(e) {
     try {
       e.preventDefault();
-      // login function from context
+      // login function from contex
       await context.login(email, password);
 
       // check to see if we have from url in location object
-      const url = location.state.from
-        ? location.state.from.pathname
-        : '/';
+      // const url = location.state.from
+      //   ? location.state.from.pathname
+      //   : '/';
       
       // redirect to url
-      history.replace(url);
+      history.replace('/');
       
       // console.log('context from handleSubmit in Login', context);
     } catch (error) {
@@ -36,10 +36,25 @@ export default function Login() {
 
   }
 
-  async function handleSignUpClick() {
-    console.log('email', email);
-    // const user = await signUpUser(email, password);
-    // setUser(user);
+  async function handleSignUpClick(e) {
+    try {
+      e.preventDefault();
+      // login function from context
+      await context.signUp(email, password);
+
+      // check to see if we have from url in location object
+      // const url = location.state.from
+      //   ? location.state.from.pathname
+      //   : '/';
+      
+      // redirect to url
+      history.replace('/');
+      
+      // console.log('context from handleSubmit in Login', context);
+    } catch (error) {
+      // catches the error thrown on line 20 of UserContext
+      setError(error.message);
+    }
   }
 
 
@@ -48,7 +63,7 @@ export default function Login() {
     <div>
       <h3>Sign Up/Sign In</h3>
       <form action=""
-        onSubmit={handleSignInSubmit}
+        // onSubmit={handleSignInSubmit}
       >
         <label htmlFor="email">Email: 
           <input
@@ -72,6 +87,7 @@ export default function Login() {
         </label>
         <button
           aria-label="Sign In"
+          onClick={handleSignInClick}
         >Sign-In</button>
         <button
           aria-label="Sign Up"

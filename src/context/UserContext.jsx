@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import { signInUser } from '../services/user';
+import { signInUser, signUpUser } from '../services/user';
 
 const UserContext = createContext();
 
@@ -15,17 +15,21 @@ export default function UserProvider({ children }) {
     // use supabase signInUser
     const authenticatedUser = await signInUser({ email, password });
 
-
     // first hardcode user
     if (authenticatedUser) {
       // set the user in context and should redirect to page they were trying to go to
       setUser(authenticatedUser);
     }
-    // else {
-    //   //set an error message of Invalid credentials
-    //   throw new Error('Invalid credentials'); // same as error = { message: 'Invalid Credentials' }
-    // }
   };
+
+  async function signUp(email, password) {
+    const newUser = await signUpUser({ email, password });
+    console.log('newUser', newUser);
+
+    if (newUser) {
+      setUser(newUser);
+    }
+  }
 
   function logout() {
     //simple logout function just sets email to null
@@ -34,7 +38,7 @@ export default function UserProvider({ children }) {
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, login, logout }}
+      value={{ user, setUser, login, logout, signUp }}
     >
       {children}
     </UserContext.Provider>
