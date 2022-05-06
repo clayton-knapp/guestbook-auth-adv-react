@@ -9,8 +9,8 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const location = useLocation();
-  const context = useUser();
   const history = useHistory();
+  const context = useUser();
 
   // console.log('location', location);
 
