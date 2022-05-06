@@ -38,6 +38,10 @@ describe('Testing App', () => {
       name: /create an entry/i
     });
 
+    await screen.findByText(/hello world/i);
+
+    await screen.findByText(/post #2/i);
+
   });
 
 

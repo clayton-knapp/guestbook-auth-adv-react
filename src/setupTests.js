@@ -4,7 +4,7 @@ global.fetch = fetch;
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 
-const data = {
+const dataToken = {
   "access_token": "MOCKED_ACCESS_TOKEN", //changed
   "token_type": "bearer",
   "expires_in": 3600,
@@ -43,11 +43,34 @@ const data = {
   }
 };
 
+const dataEntries = [
+  {
+    "id": 318,
+    "guest_id": "b88222c7-bb90-427a-800c-5f848ead1f8e",
+    "content": "Post #2",
+    "created_at": "2022-05-06T23:33:45.910957+00:00"
+  },
+  {
+    "id": 317,
+    "guest_id": "b88222c7-bb90-427a-800c-5f848ead1f8e",
+    "content": "Hello World",
+    "created_at": "2022-05-06T23:33:40.391909+00:00"
+  }
+]; 
+
+
 const server = setupServer(
+  // sign in endpoint
   rest.post('https://ezwbsacoojmonmiqffad.supabase.co/auth/v1/token', (req, res, ctx) =>
-    res(ctx.json(data))
+    res(ctx.json(dataToken))
+  ),
+  // get entries endpoint
+  rest.get('https://ezwbsacoojmonmiqffad.supabase.co/rest/v1/entries', (req, res, ctx) => 
+    res(ctx.json(dataEntries))
   )
 );
+
+
 
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
