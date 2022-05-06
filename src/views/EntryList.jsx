@@ -9,6 +9,9 @@ export default function EntryList() {
   const [isLoading, setIsLoading] = useState(true);
   const [userEntry, setUserEntry] = useState('')
   const id = context.user.id;
+  const email = context.user.email;
+
+  console.log('context', context);
 
   useEffect(() => {
     async function getAndSetEntries() {
@@ -19,6 +22,12 @@ export default function EntryList() {
     getAndSetEntries();
   }, []);
 
+  async function refreshEntries() {
+    const resp = await getEntries();
+    setEntries(resp);
+    setIsLoading(false);
+  }
+
   console.log('entries', entries);
 
   async function handleSubmitEntry(e) {
@@ -27,7 +36,9 @@ export default function EntryList() {
     console.log('stuff', id, userEntry)
     await createEntry({ userId: id, content: userEntry });
 
-
+    //clear form
+    setUserEntry('');
+    refreshEntries();
   }
 
   async function handleLogout() {
@@ -45,21 +56,20 @@ export default function EntryList() {
       <form action=""
         onSubmit={handleSubmitEntry}
       >
-        <label htmlFor="entry">
-          <textarea
-            name="entry"
-            type='text'
-            id=""
-            cols="30"
-            rows="10"
-            placeholder='Enter text here'
-            onChange={(e) => setUserEntry(e.target.value)}
-          ></textarea>
-          <button
-            type="submit"
-            aria-label='Submit Entry'
-          >Submit</button>
-        </label>
+        <textarea
+          value={userEntry}
+          name="entry"
+          type='text'
+          id=""
+          cols="30"
+          rows="10"
+          placeholder='Enter text here'
+          onChange={(e) => setUserEntry(e.target.value)}
+        ></textarea>
+        <button
+          type="submit"
+          aria-label='Submit Entry'
+        >Submit</button>
       </form>
 
       {isLoading
@@ -67,9 +77,10 @@ export default function EntryList() {
         : (
           <ul>
             {entries.map((entry) => 
-              <p key={entry.id}>
-                {entry.content}
-              </p>
+              <div key={entry.id}>
+                <h3>{email} at {new Date(entry.created_at).toLocaleString()}</h3>
+                <p>{entry.content}</p>
+              </div>
             )}
           </ul>
         )

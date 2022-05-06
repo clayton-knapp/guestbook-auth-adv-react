@@ -1,12 +1,13 @@
 import { createContext, useContext, useState } from 'react';
-import { signInUser, signOutUser, signUpUser } from '../services/user';
+import { getUser, signInUser, signOutUser, signUpUser } from '../services/user';
 
 const UserContext = createContext();
 
 // create a UserProvider component to provide components with state
 
 export default function UserProvider({ children }) {
-  const [user, setUser] = useState({ email: null });
+  const currentUser = getUser();
+  const [user, setUser] = useState(currentUser || { email: null });
 
   // write login and logout functions here
   async function login(email, password) {
@@ -41,7 +42,13 @@ export default function UserProvider({ children }) {
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, login, logout, signUp }}
+      value={{
+        user,
+        setUser,
+        login,
+        logout,
+        signUp
+      }}
     >
       {children}
     </UserContext.Provider>
