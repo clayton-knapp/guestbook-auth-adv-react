@@ -12,8 +12,8 @@ import UserProvider from './context/UserContext';
 // afterEach(() => server.resetHandlers());
 // afterAll(() => server.close());
 
-describe('Testing App', () => {
-  it('logs in, renders a list of entries, and maybe adds a new entry', async () => {
+describe('Testing App Behavior', () => {
+  it('logs in, renders a list of entries, and adds a new entry', async () => {
     render(
       <MemoryRouter>
         <UserProvider>
@@ -41,6 +41,20 @@ describe('Testing App', () => {
     await screen.findByText(/hello world/i);
 
     await screen.findByText(/post #2/i);
+
+    // can we add a new entry and see it?
+
+    const textBox = screen.getByRole('textbox');
+    userEvent.type(textBox, 'Some Crazy Third Thing');
+
+    const submitButton = screen.getByRole('button', {
+      name: /submit entry/i
+    });
+    userEvent.click(submitButton);
+
+    await screen.findByText(/some crazy third thing/i);
+
+    // await screen.debug();
 
   });
 

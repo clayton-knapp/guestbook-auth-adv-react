@@ -58,6 +58,15 @@ const dataEntries = [
   }
 ]; 
 
+const dataSentEntry = [
+  {
+    "id": 327,
+    "guest_id": "b88222c7-bb90-427a-800c-5f848ead1f8e",
+    "content": "A Third Post",
+    "created_at": "2022-05-06T23:49:17.879706+00:00"
+  }
+];
+
 
 const server = setupServer(
   // sign in endpoint
@@ -67,6 +76,10 @@ const server = setupServer(
   // get entries endpoint
   rest.get('https://ezwbsacoojmonmiqffad.supabase.co/rest/v1/entries', (req, res, ctx) => 
     res(ctx.json(dataEntries))
+  ),
+  // post entry endpoint
+  rest.post('https://ezwbsacoojmonmiqffad.supabase.co/rest/v1/entries', (req, res, ctx) => 
+    res(ctx.json(dataSentEntry))
   )
 );
 
