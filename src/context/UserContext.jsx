@@ -28,14 +28,12 @@ export default function UserProvider({ children }) {
   async function signUp(email, password) {
     const newUser = await signUpUser({ email, password });
     // console.log('newUser', newUser);
-
     if (newUser) {
       setUser(newUser);
     }
   }
 
   async function logout() {
-    //simple logout function just sets email to null
     await signOutUser();
     setUser({ email: null });
   }
