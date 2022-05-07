@@ -11,7 +11,7 @@ export default function EntryList() {
   const id = context.user.id;
   const email = context.user.email;
 
-  console.log('context', context);
+  // console.log('context', context);
 
   useEffect(() => {
     async function getAndSetEntries() {
@@ -28,16 +28,17 @@ export default function EntryList() {
     setIsLoading(false);
   }
 
-  console.log('entries', entries);
+  // console.log('entries', entries);
 
   async function handleSubmitEntry(e) {
     e.preventDefault();
 
-    console.log('stuff', id, userEntry)
+    // console.log('stuff', id, userEntry)
     await createEntry({ userId: id, content: userEntry });
 
     //clear form
     setUserEntry('');
+    
     refreshEntries();
   }
 

@@ -16,7 +16,7 @@ export default function UserProvider({ children }) {
     // use supabase signInUser
     const authenticatedUser = await signInUser({ email, password });
 
-    console.log('authenticatedUser', authenticatedUser);
+    // console.log('authenticatedUser', authenticatedUser);
 
     // first hardcode user
     if (authenticatedUser) {
@@ -27,7 +27,7 @@ export default function UserProvider({ children }) {
 
   async function signUp(email, password) {
     const newUser = await signUpUser({ email, password });
-    console.log('newUser', newUser);
+    // console.log('newUser', newUser);
 
     if (newUser) {
       setUser(newUser);
