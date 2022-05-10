@@ -8,6 +8,7 @@ export default function EntryList() {
   const [entries, setEntries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [userEntry, setUserEntry] = useState('')
+  const [error, setError] = useState('');
   const id = context.user.id;
   const email = context.user.email;
 
@@ -31,15 +32,20 @@ export default function EntryList() {
   // console.log('entries', entries);
 
   async function handleSubmitEntry(e) {
-    e.preventDefault();
+    try {
+      e.preventDefault();
+  
+      // console.log('stuff', id, userEntry)
+      await createEntry({ userId: id, content: userEntry });
+  
+      //clear form
+      setUserEntry('');
+      
+      await refreshEntries();
 
-    // console.log('stuff', id, userEntry)
-    await createEntry({ userId: id, content: userEntry });
-
-    //clear form
-    setUserEntry('');
-    
-    refreshEntries();
+    } catch (error) {
+      setError(error.message);
+    }
   }
 
   return (
@@ -81,6 +87,7 @@ export default function EntryList() {
           </>
         )
       }
+      <p>{error}</p>
     </div>
   )
 };

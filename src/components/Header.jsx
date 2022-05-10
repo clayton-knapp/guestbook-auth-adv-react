@@ -1,4 +1,3 @@
-import { context } from 'msw';
 import React from 'react';
 import { useUser } from '../context/UserContext';
 
